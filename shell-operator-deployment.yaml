@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell-operator-ns-reconciler
+  labels:
+    app: shell-operator-ns-reconciler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shell-operator-ns-reconciler
+  template:
+    metadata:
+      labels:
+        app: shell-operator-ns-reconciler
+      # annotations:
+      #   checksum/hook: {{ .Files.Get "hooks/namespace-hook.sh" | sha256sum }}
+    spec:
+      containers:
+      - name: shell-operator-ns-reconciler
+        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.3"
+        imagePullPolicy: Always
+        # volumeMounts:
+        # - name: example-helm-hooks
+        #   mountPath: /hooks/
+      serviceAccountName: shell-operator-ns-reconciler
+      # volumes:
+      # - name: example-helm-hooks
+      #   configMap:
+      #     name: example-helm-hooks
+      #     defaultMode: 0777
