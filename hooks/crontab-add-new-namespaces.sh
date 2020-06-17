@@ -6,8 +6,8 @@ if [[ $1 == "--config" ]] ; then
   "configVersion":"v1",
   "schedule": [
     {
-      "name": "every 5 min",
-      "crontab": "0 */5 * * * *"
+      "name": "every ${RECONCILE_INTERVAL_MINUTES} min",
+      "crontab": "0 */${RECONCILE_INTERVAL_MINUTES} * * * *"
     }
   ]
 }
@@ -17,7 +17,9 @@ else
   echo "Message from 'crontab-add-new-namespaces' hook with 6 fields crontab: $binding"
 
   git clone https://github.com/sadhal/tenant-x.git
-  echo "commit: " `git log -n 1 --pretty=format:"%H"`;
-  kubectl apply -k tenant-x/cluster-0
+  echo "commit: `git log -n 1 --pretty=format:"%H"`";
+  echo "working in cluster: $CLUSTER_NAME";
+  kustomize_overlay="tenant-x/overlays/$CLUSTER_NAME"
+  kubectl apply -k $kustomize_overlay
   rm -fr tenant-x
 fi

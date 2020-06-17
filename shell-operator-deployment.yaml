@@ -19,11 +19,23 @@ spec:
     spec:
       containers:
       - name: shell-operator-ns-reconciler
-        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.3"
+        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.4"
         imagePullPolicy: Always
+        env:
+        - name: RECONCILE_INTERVAL_MINUTES
+          value: "1"
+        - name: CLUSTER_NAME
+          value: cluster-0
         # volumeMounts:
         # - name: example-helm-hooks
         #   mountPath: /hooks/
+        resources:
+          requests:
+            cpu: "5m"
+            memory: "1Mi"
+          limits:
+            cpu: "100m"
+            memory: "60Mi"
       serviceAccountName: shell-operator-ns-reconciler
       # volumes:
       # - name: example-helm-hooks
