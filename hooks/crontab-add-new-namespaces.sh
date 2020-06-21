@@ -16,10 +16,13 @@ else
   binding=$(cat $BINDING_CONTEXT_PATH)
   echo "Message from 'crontab-add-new-namespaces' hook with 6 fields crontab: $binding"
 
-  git clone https://github.com/sadhal/tenant-x.git
-  echo "commit: `git log -n 1 --pretty=format:"%H"`";
+  git clone --depth=1 https://github.com/sadhal/tenant-x.git /tenant-x
+  cd /tenant-x
+  echo `pwd`
+  echo "commit: `git log -n 1`";
   echo "working in cluster: $CLUSTER_NAME";
-  kustomize_overlay="tenant-x/overlays/$CLUSTER_NAME"
+  kustomize_overlay="overlays/$CLUSTER_NAME"
   kubectl apply -k $kustomize_overlay
-  rm -fr tenant-x
+  cd -
+  rm -fr /tenant-x
 fi

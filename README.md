@@ -1,13 +1,13 @@
 ## Schedule example
 
-Example of hooks with schedule bindings. 5 fields and 6 fields for crontab are supported.
+Example of hooks with schedule bindings. 6 fields for crontab are used.
 
 ### run
 
 Build shell-operator image with custom scripts:
 
 ```bash
-$ export current_tag=0.0.4
+$ export current_tag=0.0.5
 $ podman build -t "docker.io/sadhal/shell-operator-ns-reconciler:${current_tag}" .
 $ podman push docker.io/sadhal/shell-operator-ns-reconciler:${current_tag}
 ```

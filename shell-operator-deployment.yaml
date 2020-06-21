@@ -5,6 +5,7 @@ metadata:
   name: shell-operator-ns-reconciler
   labels:
     app: shell-operator-ns-reconciler
+    gits.cluster: cluster-0
 spec:
   replicas: 1
   selector:
@@ -19,7 +20,7 @@ spec:
     spec:
       containers:
       - name: shell-operator-ns-reconciler
-        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.4"
+        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.5"
         imagePullPolicy: Always
         env:
         - name: RECONCILE_INTERVAL_MINUTES
@@ -31,11 +32,11 @@ spec:
         #   mountPath: /hooks/
         resources:
           requests:
-            cpu: "5m"
-            memory: "1Mi"
+            cpu: "25m"
+            memory: "15Mi"
           limits:
-            cpu: "100m"
-            memory: "60Mi"
+            cpu: "1000m"
+            memory: "1024Mi"
       serviceAccountName: shell-operator-ns-reconciler
       # volumes:
       # - name: example-helm-hooks

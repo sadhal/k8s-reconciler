@@ -19,6 +19,15 @@ rules:
 - apiGroups: [""]
   resources: ["limitranges"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]  
+- apiGroups: ["argoproj.io"]
+  resources: ["argocds"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]  
+- apiGroups: ["argoproj.io"]
+  resources: ["appprojects"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] 
+- apiGroups: ["argoproj.io"]
+  resources: ["applications"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]  
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
