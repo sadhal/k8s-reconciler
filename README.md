@@ -34,6 +34,6 @@ $ kubectl -n appinfra-k8s-reconciler logs $podNameArgoCD
 ### cleanup
 
 ```bash
-$ kubectl delete ns/appinfra-ns-reconciler
-$ podman rmi docker.io/sadhal/shell-operator-ns-reconciler:${current_tag}
+$ kubectl delete ns/appinfra-k8s-reconciler
+$ podman rmi docker.io/sadhal/shell-operator-k8s-reconciler:${current_tag}
 ```
