@@ -12,10 +12,14 @@ spec:
   selector:
     matchLabels:
       app: ns-reconciler
+      gits.cluster: cluster-1
+      gits.reconcile.type: namespace
   template:
     metadata:
       labels:
         app: ns-reconciler
+        gits.cluster: cluster-1
+        gits.reconcile.type: namespace
       # annotations:
       #   checksum/hook: {{ .Files.Get "hooks/namespace-hook.sh" | sha256sum }}
     spec:

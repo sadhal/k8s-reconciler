@@ -12,10 +12,14 @@ spec:
   selector:
     matchLabels:
       app: argocd-reconciler
+      gits.cluster: cluster-1
+      gits.reconcile.type: argocd
   template:
     metadata:
       labels:
         app: argocd-reconciler
+        gits.cluster: cluster-1
+        gits.reconcile.type: argocd
       # annotations:
       #   checksum/hook: {{ .Files.Get "hooks/namespace-hook.sh" | sha256sum }}
     spec:
