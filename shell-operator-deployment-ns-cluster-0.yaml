@@ -30,6 +30,7 @@ spec:
         env:
         - name: RECONCILE_INTERVAL_MINUTES
           value: "1"
+          # value: "15"
         - name: GIT_REPO
           value: https://github.com/sadhal/tenant-x.git
         - name: KUSTOMIZE_OVERLAY_PATH
