@@ -2,31 +2,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shell-operator-ns-reconciler
+  name: ns-reconciler
   labels:
-    app: shell-operator-ns-reconciler
+    app: ns-reconciler
     gits.cluster: cluster-0
+    gits.reconcile.type: namespace
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: shell-operator-ns-reconciler
+      app: ns-reconciler
   template:
     metadata:
       labels:
-        app: shell-operator-ns-reconciler
+        app: ns-reconciler
       # annotations:
       #   checksum/hook: {{ .Files.Get "hooks/namespace-hook.sh" | sha256sum }}
     spec:
       containers:
-      - name: shell-operator-ns-reconciler
-        image: "docker.io/sadhal/shell-operator-ns-reconciler:0.0.5"
+      - name: ns-reconciler
+        image: "docker.io/sadhal/shell-operator-k8s-reconciler:0.0.1"
         imagePullPolicy: Always
         env:
         - name: RECONCILE_INTERVAL_MINUTES
           value: "1"
-        - name: CLUSTER_NAME
-          value: cluster-0
+        - name: GIT_REPO
+          value: https://github.com/sadhal/tenant-x.git
+        - name: KUSTOMIZE_OVERLAY_PATH
+          value: overlays/cluster-0
         # volumeMounts:
         # - name: example-helm-hooks
         #   mountPath: /hooks/
@@ -37,7 +40,7 @@ spec:
           limits:
             cpu: "1000m"
             memory: "1024Mi"
-      serviceAccountName: shell-operator-ns-reconciler
+      serviceAccountName: shell-operator-k8s-reconciler
       # volumes:
       # - name: example-helm-hooks
       #   configMap:

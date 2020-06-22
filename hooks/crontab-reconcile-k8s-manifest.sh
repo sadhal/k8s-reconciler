@@ -14,15 +14,15 @@ if [[ $1 == "--config" ]] ; then
 EOF
 else
   binding=$(cat $BINDING_CONTEXT_PATH)
-  echo "Message from 'crontab-add-new-namespaces' hook with 6 fields crontab: $binding"
+  echo "Message from 'crontab-reconcile-k8s-manifest' hook with 6 fields crontab: $binding"
 
-  git clone --depth=1 https://github.com/sadhal/tenant-x.git /tenant-x
-  cd /tenant-x
+  git clone --depth=1 $GIT_REPO /myfolder
+  cd /myfolder
   echo `pwd`
   echo "commit: `git log -n 1`";
-  echo "working in cluster: $CLUSTER_NAME";
-  kustomize_overlay="overlays/$CLUSTER_NAME"
+  echo "working in cluster: $KUSTOMIZE_OVERLAY_PATH";
+  kustomize_overlay="$KUSTOMIZE_OVERLAY_PATH"
   kubectl apply -k $kustomize_overlay
   cd -
-  rm -fr /tenant-x
+  rm -fr /myfolder
 fi

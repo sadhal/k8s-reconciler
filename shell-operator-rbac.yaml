@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: shell-operator-ns-reconciler
+  name: shell-operator-k8s-reconciler
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: shell-operator-ns-reconciler
+  name: shell-operator-k8s-reconciler
 rules:
 - apiGroups: [""]
   resources: ["namespaces"]
@@ -32,12 +32,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
-  name: shell-operator-ns-reconciler
+  name: shell-operator-k8s-reconciler
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: shell-operator-ns-reconciler
+  name: shell-operator-k8s-reconciler
 subjects:
   - kind: ServiceAccount
-    name: shell-operator-ns-reconciler
-    namespace: appinfra-ns-reconciler
+    name: shell-operator-k8s-reconciler
+    namespace: appinfra-k8s-reconciler
